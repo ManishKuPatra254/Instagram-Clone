@@ -1,14 +1,138 @@
 .main_left_home {
-    border: 2px solid rgb(0, 0, 0);
+    border: 1px solid #c7c7c7;
     width: 20%;
-    height: 100%;
+    height: auto;
+    padding: 15px 12px;
 }
 
 .main_left_home img {
-    /* border: 1px solid red; */
-    margin: auto;
-    width: 100px;
+    width: 120px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.sub_btn_part {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: auto;
+}
+
+.btn1 {
+    background-color: transparent;
     display: flex;
     align-items: center;
-    justify-content: center;
+    text-align: center;
+    transition: .1s ease-in-out;
+}
+
+.btn1 p {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    padding: 10px 15px;
+    font-size: 16px;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn1 button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+}
+
+.account_sync {
+    height: auto;
+    margin-top: 85px;
+}
+
+.btn2 {
+    display: flex;
+    align-items: center;
+}
+
+.btn2 p {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    padding: 10px 15px;
+    font-size: 16px;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn2 button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media screen and (max-width : 800px) {
+
+    .main_left_home {
+        border: 1px solid #c7c7c7;
+        width: auto;
+        height: 100%;
+        padding: 15px 12px;
+    }
+
+    .main_left_home img {
+        visibility: hidden;
+        width: 45px;
+    }
+
+    .btn1 button {
+        display: none;
+    }
+
+    .btn2 button {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    .main_left_home {
+        width: auto;
+        height: auto;
+        border: 1px solid #c7c7c7;
+        flex-direction: column;
+        position: fixed;
+        top: 50px;
+    }
+
+    .sub_btn_part {
+        width: 100%;
+        flex-direction: row;
+        text-align: center;
+    }
+
+    .account_sync {
+        display: none;
+    }
+
+    .sub_btn_part .btn1:nth-child(3) {
+        display: none;
+    }
+
+    .sub_btn_part .btn1:nth-child(6) {
+        display: none;
+    }
+
+    .sub_btn_part .btn1:nth-child(7) {
+        display: none;
+    }
 }
