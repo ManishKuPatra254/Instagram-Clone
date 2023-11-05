@@ -1,25 +1,38 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import styles from './IMainLeftHome.module.css';
 import instalogo from '../../assets/insta 1.png'
 import { MdHomeFilled } from "react-icons/md"
 import { BiSearch } from "react-icons/bi"
 import { AiOutlineCompass } from "react-icons/ai"
-import { BiMessageRoundedCheck } from "react-icons/bi"
 import { AiOutlineHeart } from "react-icons/ai"
 import { RiAddBoxLine } from "react-icons/ri"
 import { BiSolidVideos } from "react-icons/bi"
 import { CgProfile } from "react-icons/cg"
 import { AiOutlineMenu } from "react-icons/ai"
 import { SiThreads } from "react-icons/si"
-// import { BsInstagram } from "react-icons/bs"
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
+import TurnedInNotOutlinedIcon from '@mui/icons-material/TurnedInNotOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
+import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 
 
 export function IMainLeftHome() {
 
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    }
+
+    function themeToogle() {
+        alert('Hi')
+    }
 
     return (
         <Fragment>
-          <div className={`${styles.main_left_home} ${styles.responsive_layout}`}>
+            <div className={`${styles.main_left_home} ${styles.responsive_layout}`}>
                 <img src={instalogo} alt="" />
                 <div className={styles.sub_btn_part}>
                     <div className={styles.btn1}>
@@ -43,7 +56,7 @@ export function IMainLeftHome() {
                     </div>
 
                     <div className={styles.btn1}>
-                        <p><BiMessageRoundedCheck size={28} /></p>
+                        <p><MapsUgcOutlinedIcon size={28} /></p>
                         <button>Messages</button>
 
                     </div>
@@ -68,11 +81,23 @@ export function IMainLeftHome() {
                     <div className={styles.btn2}>
                         <p><SiThreads size={28} /></p>
                         <button>Threads</button>
+
                     </div>
 
-                    <div className={styles.btn2}>
+                    <div className={styles.btn2} onClick={toggleDropdown}>
                         <p><AiOutlineMenu size={28} /></p>
                         <button>More</button>
+                        {isDropdownOpen && (
+                            <div className={styles.drop_appe_tp}>
+                                <p><SettingsOutlinedIcon />Settings</p>
+                                <p><InsertChartOutlinedIcon />Your activity</p>
+                                <p><TurnedInNotOutlinedIcon />Saved</p>
+                                <p onClick={() => themeToogle()}><LightModeOutlinedIcon />Switch appearance</p>
+                                <p><ReportGmailerrorredOutlinedIcon />Report a problem</p>
+                                <p>Switch accounts</p>
+                                <p>Log out</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
