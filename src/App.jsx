@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import './App.css'
 import { InstaLogin } from './ILogin/ILogin';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home } from './Home/Home';
+import { IHome } from './IHome/IHome';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<InstaLogin />} />
-            <Route path='/home' element={<Home />} />
+            <Route path='/home' element={<IHome />} />
           </Routes>
         </BrowserRouter>
       </div>

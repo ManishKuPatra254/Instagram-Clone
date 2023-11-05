@@ -1,0 +1,8 @@
+.main_right_home {
+    border: 2px solid rgb(0, 0, 0);
+    width: 390px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
