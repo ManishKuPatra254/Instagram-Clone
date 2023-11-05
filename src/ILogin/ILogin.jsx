@@ -8,8 +8,14 @@ import image5 from '../assets/Group 1.png'
 import { Box, Container } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useNavigate } from 'react-router-dom'
 
 export function InstaLogin() {
+    const navigateHome = useNavigate();
+
+    function handleNavigateHome() {
+        navigateHome('/home')
+    }
     return (
         <Fragment>
             <div className={styles.main_login_insta_1}>
@@ -30,7 +36,7 @@ export function InstaLogin() {
                             <div className={styles.input_text_login_f}>
                                 <input type='text' placeholder='Phone number, username, or email' />
                                 <input type='password' placeholder='Password' />
-                                <button>Log in</button>
+                                <button onClick={handleNavigateHome}>Log in</button>
                                 <span>𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖<strong style={{
                                     color: '#818589',
                                     fontSize: '12px',
