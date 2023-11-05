@@ -1,6 +1,6 @@
 .main_middle_home {
     border: 2px solid rgb(0, 0, 0);
-    width: 850px;
+    width: 60%;
     height: 100%;
     display: flex;
     flex-direction: column;

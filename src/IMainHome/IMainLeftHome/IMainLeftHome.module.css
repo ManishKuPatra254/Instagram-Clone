@@ -1,8 +1,14 @@
 .main_left_home {
     border: 2px solid rgb(0, 0, 0);
-    width: 300px;
+    width: 20%;
     height: 100%;
+}
+
+.main_left_home img {
+    /* border: 1px solid red; */
+    margin: auto;
+    width: 100px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
 }
