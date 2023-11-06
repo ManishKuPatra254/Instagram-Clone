@@ -17,8 +17,11 @@ import TurnedInNotOutlinedIcon from '@mui/icons-material/TurnedInNotOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
-// import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { auth } from '../../Firebase/Firebase'
+import { logInUser } from '../../UserStoreFeatures/UserStoreFeatures';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 export function IMainLeftHome() {
 
@@ -32,7 +35,16 @@ export function IMainLeftHome() {
         alert('Hi')
     }
 
-    // const user = useSelector((state) => state.data.user.user)
+    const user = useSelector((state) => state.data.user.user)
+
+    const dispathch = useDispatch();
+    const navigateToLogout = useNavigate();
+
+    function handleLogoutPage() {
+        dispathch(logInUser());
+        signOut(auth)
+        navigateToLogout('/');
+    }
 
     return (
         <Fragment>
@@ -81,7 +93,7 @@ export function IMainLeftHome() {
                             height: 32,
                             marginRight: '10px',
                         }}>A</Avatar>
-                        <button></button>
+                        <button>{user.uid}</button>
                     </div>
                 </div>
 
@@ -103,12 +115,12 @@ export function IMainLeftHome() {
                                 <p onClick={() => themeToogle()}><LightModeOutlinedIcon />Switch appearance</p>
                                 <p><ReportGmailerrorredOutlinedIcon />Report a problem</p>
                                 <p>Switch accounts</p>
-                                <p>Log out</p>
+                                <p onClick={handleLogoutPage}>Log out</p>
                             </div>
                         )}
                     </div>
                 </div>
             </div>
-        </Fragment >
+        </Fragment>
     )
 }
