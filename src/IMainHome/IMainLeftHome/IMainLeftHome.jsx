@@ -7,7 +7,8 @@ import { AiOutlineCompass } from "react-icons/ai"
 import { AiOutlineHeart } from "react-icons/ai"
 import { RiAddBoxLine } from "react-icons/ri"
 import { BiSolidVideos } from "react-icons/bi"
-import { CgProfile } from "react-icons/cg"
+// import { CgProfile } from "react-icons/cg"
+import { Avatar } from '@mui/material';
 import { AiOutlineMenu } from "react-icons/ai"
 import { SiThreads } from "react-icons/si"
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
@@ -16,6 +17,7 @@ import TurnedInNotOutlinedIcon from '@mui/icons-material/TurnedInNotOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
+// import { useSelector } from 'react-redux';
 
 
 export function IMainLeftHome() {
@@ -29,6 +31,8 @@ export function IMainLeftHome() {
     function themeToogle() {
         alert('Hi')
     }
+
+    // const user = useSelector((state) => state.data.user.user)
 
     return (
         <Fragment>
@@ -71,9 +75,13 @@ export function IMainLeftHome() {
                         <button>Create</button>
                     </div>
 
-                    <div className={styles.btn1}>
-                        <p><CgProfile size={28} /></p>
-                        <button>Profile</button>
+                    <div className={styles.btn3}>
+                        <Avatar sx={{
+                            width: 32,
+                            height: 32,
+                            marginRight: '10px',
+                        }}>A</Avatar>
+                        <button></button>
                     </div>
                 </div>
 
@@ -101,6 +109,6 @@ export function IMainLeftHome() {
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </Fragment >
     )
 }

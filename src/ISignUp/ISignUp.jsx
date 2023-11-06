@@ -1,44 +1,44 @@
-import { Fragment, useState } from 'react'
-import styles from './ILogin.module.css'
-import image1 from '../assets/30.png'
+import { Fragment, useState } from "react";
+import styles from './ISignUp.module.css';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Box, Container } from '@mui/material'
 import image2 from '../assets/insta 1.png'
-import image3 from '../assets/instameta.png'
+import FacebookIcon from '@mui/icons-material/Facebook';
+import { Link, useNavigate } from "react-router-dom";
 import image4 from '../assets/Group 2.png'
 import image5 from '../assets/Group 1.png'
-import { Box, Container } from '@mui/material'
-import FacebookIcon from '@mui/icons-material/Facebook';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { auth } from '../Firebase/Firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '../Firebase/Firebase';
 
+export function ISignUp() {
 
-export function ILogin() {
+    const navigateToLoinPage = useNavigate()
 
-    const [loginEmail, setLoginEmail] = useState('')
-    const [loginPassword, setLoginPassword] = useState('')
+    const [signupEmail, setSignupEmail] = useState('')
+    const [signupFullname, setSignupFullname] = useState('')
+    const [signupUsername, setSignupUsername] = useState('')
+    const [signupPassword, setSignupPassword] = useState('')
 
-    // console.log(loginEmail , loginPassword);
-
-    const navigateHome = useNavigate();
-
-    function handleLoginPage() {
-        if (loginEmail && loginPassword) {
-            signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-            navigateHome('/home')
-        }
-        else {
+    function handleClickSignUp() {
+        if (signupEmail && signupFullname && signupUsername && signupPassword) {
+            createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
+                .then(() => signInWithEmailAndPassword(auth, signupEmail, signupPassword))
+                .then(() => updateProfile(auth.currentUser, { displayName: signupUsername }))
+                .then(() => {
+                    navigateToLoinPage('/');
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        } else {
             alert("Please fill in all the required fields.");
         }
     }
 
-
     return (
         <Fragment>
-            <div className={styles.main_login_insta_1}>
+            <div className={styles.main_signup_c}>
                 <div className={styles.sub_login_insta_1}>
-                    <img id={styles.img1} src={image1} alt="" />
                     <Container>
                         <Box sx={{
                             border: '1px solid rgb(229, 228, 226)',
@@ -51,30 +51,26 @@ export function ILogin() {
                             },
                         }}>
                             <img className={styles.img2} src={image2} alt="" />
+                            <p>Sign up to see photos and videos from your friends.</p>
+                            <button> <FacebookIcon />Log in with Facebook</button>
+                            <p>𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖<strong style={{
+                                color: '#818589',
+                                fontSize: '12px',
+                                padding: '4px'
+                            }}>OR</strong>    𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖</p>
                             <div className={styles.input_text_login_f}>
 
-                                <input type='text' placeholder='Phone number, username, or email'
-                                    value={loginEmail}
-                                    onChange={e => setLoginEmail(e.target.value)} />
+                                <input type='email' placeholder='Mobile number or Email' value={signupEmail} onChange={e => setSignupEmail(e.target.value)} />
 
-                                <input type='password' placeholder='Password'
-                                    value={loginPassword}
-                                    onChange={e => setLoginPassword(e.target.value)}
-                                />
+                                <input type='text' placeholder='Full Name' value={signupFullname} onChange={e => setSignupFullname(e.target.value)} />
 
-                                <button
-                                    onClick={handleLoginPage}
-                                >Log in</button>
-                                <span>𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖<strong style={{
-                                    color: '#818589',
-                                    fontSize: '12px',
-                                    padding: '4px'
-                                }}>OR</strong>    𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖𝄖</span>
-                            </div>
+                                <input type='text' placeholder='Username' value={signupUsername} onChange={e => setSignupUsername(e.target.value)} />
 
-                            <div className={styles.connect_fb_fp}>
-                                <p><FacebookIcon sx={{ color: '#1A5276' }} />Log in with Facebook</p>
-                                <a href='#12'>Forgot password?</a>
+                                <input type='password' placeholder='Password' value={signupPassword} onChange={e => setSignupPassword(e.target.value)} />
+
+                                <p>People who use our service may have uploaded your contact information to Instagram. Learn More</p>
+                                <p>By signing up, you agree to our Terms , Privacy Policy and Cookies Policy .</p>
+                                <button onClick={handleClickSignUp}>Sign up</button>
                             </div>
                         </Box>
 
@@ -89,7 +85,7 @@ export function ILogin() {
                             },
                         }}>
                             <div className={styles.signup_insta}>
-                                <p>Dont have an account?  <Link to={'/signup'}>Sign up</Link> </p>
+                                <p>Have an account? <Link to={'/'}>Log in</Link> </p>
                             </div>
                         </Box>
 
@@ -132,13 +128,6 @@ export function ILogin() {
             <div className={styles.reserved_ref}>
                 <button>English <KeyboardArrowDownIcon /></button>
                 <p>© 2023 Instagram from Manish</p>
-            </div>
-
-
-
-            <div className={styles.meta_logo}>
-                <p>from</p>
-                <img src={image3} alt="" />
             </div>
         </Fragment>
     )
