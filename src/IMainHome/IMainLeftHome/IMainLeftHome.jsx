@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import styles from './IMainLeftHome.module.css';
 import instalogo from '../../assets/insta 1.png'
 import { MdHomeFilled } from "react-icons/md"
@@ -7,7 +7,6 @@ import { AiOutlineCompass } from "react-icons/ai"
 import { AiOutlineHeart } from "react-icons/ai"
 import { RiAddBoxLine } from "react-icons/ri"
 import { BiSolidVideos } from "react-icons/bi"
-// import { CgProfile } from "react-icons/cg"
 import { Avatar } from '@mui/material';
 import { AiOutlineMenu } from "react-icons/ai"
 import { SiThreads } from "react-icons/si"
@@ -22,8 +21,30 @@ import { auth } from '../../Firebase/Firebase'
 import { logInUser } from '../../UserStoreFeatures/UserStoreFeatures';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 export function IMainLeftHome() {
+
+    const [open, setOpenModal] = useState(false);
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -46,10 +67,23 @@ export function IMainLeftHome() {
         navigateToLogout('/');
     }
 
+    const [openLogo, setOpenLogo] = useState(true)
+
+    useEffect(() => {
+        setOpenLogo(!openLogo);
+    }, [])
+
     return (
         <Fragment>
-            <div className={`${styles.main_left_home} ${styles.responsive_layout}`}>
-                <img src={instalogo} alt="" />
+            <div className={styles.main_left_home}>
+                {
+                    openLogo ? (
+                        <img src={instalogo} alt="" />
+                    ) : (
+                        <p className={styles.icons_resp}><InstagramIcon /></p>
+                    )
+                }
+
                 <div className={styles.sub_btn_part}>
                     <div className={styles.btn1}>
                         <p><MdHomeFilled size={28} /></p>
@@ -82,9 +116,32 @@ export function IMainLeftHome() {
                         <button>Notifications</button>
                     </div>
 
-                    <div className={styles.btn1}>
-                        <p><RiAddBoxLine size={28} /></p>
-                        <button>Create</button>
+                    <div className={styles.btn1} >
+                        <p onClick={handleOpenModal}><RiAddBoxLine size={28} /></p>
+                        <button onClick={handleOpenModal}>Create</button>
+                        <div className={style.modal_navigate}>
+                            <Modal
+                                aria-labelledby="transition-modal-title"
+                                aria-describedby="transition-modal-description"
+                                open={open}
+                                onClose={handleCloseModal}
+                                closeAfterTransition
+                                slots={{ backdrop: Backdrop }}
+                                slotProps={{
+                                    backdrop: {
+                                        timeout: 500,
+                                    },
+                                }}
+                            >
+
+                                <Fade in={open}>
+                                    <Box sx={style}>
+                                        <h2>Create new post</h2>
+                                        <input type="file" />
+                                    </Box>
+                                </Fade>
+                            </Modal>
+                        </div>
                     </div>
 
                     <div className={styles.btn3}>
@@ -92,8 +149,8 @@ export function IMainLeftHome() {
                             width: 32,
                             height: 32,
                             marginRight: '10px',
-                        }}>A</Avatar>
-                        <button>{user.uid}</button>
+                        }}>{user ? user.username.charAt(0).toUpperCase() : ''}</Avatar>
+                        <button>{user ? user.username : ''}</button>
                     </div>
                 </div>
 
@@ -121,6 +178,6 @@ export function IMainLeftHome() {
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </Fragment >
     )
 }

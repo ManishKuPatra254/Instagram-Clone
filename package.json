@@ -16,6 +16,7 @@
     "@mui/material": "^5.14.16",
     "@mui/styled-engine-sc": "^6.0.0-alpha.4",
     "@reduxjs/toolkit": "^1.9.7",
+    "axios": "^1.6.1",
     "firebase": "^10.5.2",
     "install": "^0.13.0",
     "npm": "^10.2.3",
